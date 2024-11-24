@@ -168,8 +168,8 @@ def sjekkheftet(request, side, underside=None):
     if side == 'kart':
         request.medlemMapData = json.dumps([{
             'navn': medlem.navn,
-            'boAdresse': medlem.public__boAdresse,
-            'foreldreAdresse': medlem.public__foreldreAdresse,
+            'boAdresse': medlem.boAdresseCord() if medlem.public__boAdresse else None,
+            'foreldreAdresse': medlem.foreldreAdresseCord() if medlem.public__foreldreAdresse else None,
             'storkorNavn': medlem.storkorNavn(),
             'pk': medlem.pk
         } for medlem in Medlem.objects.distinct().filter(
@@ -253,9 +253,13 @@ def sjekkheftet(request, side, underside=None):
             emne = emne.strip(',')
             medlem = Medlem.objects.filter(
                 emnekoder__icontains=emne
-            ).sjekkheftePrefetch(kor=None)
+            ).sjekkheftePrefetch(kor=None).annotatePublic()
 
             grupperinger[emne.upper()] = medlem
+
+        return render(request, 'mytxs/fellesEmner.html', {
+            'heading': 'Sjekkheftet', 'grupperinger': grupperinger
+        })
 
     if request.GET.get('vcard'):
         return downloadVCard(request.queryset)
