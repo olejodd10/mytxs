@@ -9,7 +9,10 @@ on:
 jobs:
   build:
 
-    runs-on: postgres:15
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15
     strategy:
       max-parallel: 4
       matrix:
