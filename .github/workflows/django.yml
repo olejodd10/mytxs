@@ -30,27 +30,17 @@ jobs:
         python-version: ['3.11.2']
 
     steps:
-    - name: Vente på postgres
+    - name: Sjekke PostgreSQL-versjon
       run: |
-        psql --version
-        pg_config --version
-        until pg_isready -h localhost -p 5432 -U postgres; do
+        until pg_isready; do
           echo "Postgres er ikke klar"
           sleep 1
         done
         echo "Postgres er klar"
-        pg_isready -h localhost -p 5432 -U postgres
-        pg_isready
+        echo "Versjon lokalt i runner:"
         psql --version
-        pg_config --version
-        which psql
-        which pg_config
-        psql -U postgres -h localhost -p 5432 -d postgres -c "SELECT version();"
+        echo "Versjon i service container:"
         psql -c "SELECT version();"
-        psql -U postgres -h localhost -p 5432 -d postgres --version
-        psql --version
-        pg_config --version
-        ls /usr/lib/postgresql/
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
