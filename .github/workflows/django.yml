@@ -2,7 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "develop", "develop-workflow" ]
   pull_request:
     branches: [ "main", "develop" ]
 
@@ -32,6 +32,7 @@ jobs:
     - name: Konfigurere PostgreSQL
       run: |
         sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgrespassword';"
+        sudo -u postgres psql --version;"
     - name: Kjøre tester
       env:
         DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
