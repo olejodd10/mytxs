@@ -48,7 +48,8 @@ jobs:
           systemctl status postgresql || true  # Fortsett selv om return code er nonzero
 
           echo "PostgreSQL-versjon i service container:"
-          PG_VERSION=$(psql -c "SELECT version();" | tee /dev/tty)
+          PG_VERSION=$(psql -c "SELECT version();")
+          echo -e "$PG_VERSION"
 
           EXPECTED_PG_VERSION="PostgreSQL 15"
           if [[ $PG_VERSION =~ $EXPECTED_PG_VERSION ]]; then
