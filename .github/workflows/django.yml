@@ -40,6 +40,8 @@ jobs:
         echo "Postgres er klar"
         psql --version
         pg_config --version
+        psql -c "SELECT version();"
+        psql -U postgres -h localhost -p 5432 -d postgres -c "SELECT version();"
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
