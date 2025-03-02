@@ -50,7 +50,6 @@ jobs:
         psql -U postgres -h localhost -p 5432 -d postgres --version
         psql --version
         pg_config --version
-        locate bin/psql
         ls /usr/lib/postgresql/
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
