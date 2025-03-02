@@ -37,10 +37,10 @@ jobs:
           sleep 1
         done
         echo "Postgres er klar"
-        echo "Versjon lokalt i runner:"
+        echo "Versjon i runner:"
         psql --version
         echo "Bevis på at postgres ikke kjører i runner:"
-        systemctl status postgresql
+        systemctl status postgresql 2> /dev/null
         echo "Versjon i service container:"
         psql -c "SELECT version();"
     - uses: actions/checkout@v4
