@@ -37,12 +37,16 @@ jobs:
           sleep 1
         done
         echo "Postgres er klar"
+
         echo "Versjon i runner:"
         psql --version
+
         echo "Bevis på at postgres ikke kjører i runner:"
-        systemctl status postgresql 2> /dev/null
+        systemctl status postgresql || true # || true for å fortsette runner selv om return code er nonzero
+
         echo "Versjon i service container:"
         psql -c "SELECT version();"
+
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
