@@ -43,12 +43,15 @@ jobs:
         pg_isready
         psql --version
         pg_config --version
-        echo "det er ${PGPASSWORD}"
-        echo "vl være sikker på at dette er tomt ${POSTGRES_PASSWORD}"
+        which psql
+        which pg_config
         psql -U postgres -h localhost -p 5432 -d postgres -c "SELECT version();"
         psql -c "SELECT version();"
         psql -U postgres -h localhost -p 5432 -d postgres --version
         psql --version
+        pg_config --version
+        locate bin/psql
+        ls /usr/lib/postgresql/
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
