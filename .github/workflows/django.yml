@@ -27,12 +27,12 @@ jobs:
         pip install -r requirements.txt
     - name: Starte PostgreSQL service
       run: |
+        sudo -u postgres psql --version
         sudo systemctl start postgresql
         sudo systemctl status postgresql
     - name: Konfigurere PostgreSQL
       run: |
         sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgrespassword';"
-        sudo -u postgres psql --version
     - name: Kjøre tester
       env:
         DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
