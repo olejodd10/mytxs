@@ -20,7 +20,7 @@ jobs:
     services:
       postgres:
         image: postgres:15
-        env:
+        environment:
           POSTGRES_PASSWORD: postgrespassword
         ports:
           - 5432:5432
@@ -43,6 +43,8 @@ jobs:
         pg_isready
         psql --version
         pg_config --version
+        echo "det er ${PGPASSWORD}"
+        echo "vl være sikker på at dette er tomt ${POSTGRES_PASSWORD}"
         psql -U postgres -h localhost -p 5432 -d postgres -c "SELECT version();"
         psql -c "SELECT version();"
     - uses: actions/checkout@v4
