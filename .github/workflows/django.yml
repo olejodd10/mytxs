@@ -39,6 +39,8 @@ jobs:
         echo "Postgres er klar"
         echo "Versjon lokalt i runner:"
         psql --version
+        echo "Bevis på at postgresql ikke kjører i runner:"
+        systemctl status postgres
         echo "Versjon i service container:"
         psql -c "SELECT version();"
     - uses: actions/checkout@v4
