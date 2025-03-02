@@ -32,7 +32,7 @@ jobs:
     - name: Konfigurere PostgreSQL
       run: |
         sudo -u postgres psql -c "ALTER USER postgres PASSWORD 'postgrespassword';"
-        sudo -u postgres psql --version;"
+        sudo -u postgres psql --version
     - name: Kjøre tester
       env:
         DJANGO_SECRET: ${{ secrets.DJANGO_SECRET }}
