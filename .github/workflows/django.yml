@@ -51,11 +51,11 @@ jobs:
           PG_VERSION=$(psql -c "SELECT version();")
           echo -e "$PG_VERSION"
 
-          EXPECTED_PG_VERSION="PostgreSQL 14"
+          EXPECTED_PG_VERSION="PostgreSQL 15"
           if [[ $PG_VERSION =~ $EXPECTED_PG_VERSION ]]; then
             echo "PostgreSQL-versjon er $EXPECTED_PG_VERSION"
           else
-            echo "PostgreSQL-versjon er feil"
+            echo "PostgreSQL-versjon er ikke $EXPECTED_PG_VERSION"
             exit 1
           fi
 
