@@ -40,6 +40,8 @@ jobs:
           echo "PostgreSQL er klar"
 
       - name: Verifisere PostgreSQL-version
+        env:
+          EXPECTED_PG_VERSION: "PostgreSQL 15"
         run: |
           echo "PostgreSQL-versjon i runner:"
           psql --version
@@ -51,7 +53,6 @@ jobs:
           PG_VERSION=$(psql -c "SELECT version();")
           echo -e "$PG_VERSION"
 
-          EXPECTED_PG_VERSION="PostgreSQL 15"
           if [[ $PG_VERSION =~ $EXPECTED_PG_VERSION ]]; then
             echo "PostgreSQL-versjon er $EXPECTED_PG_VERSION"
           else
