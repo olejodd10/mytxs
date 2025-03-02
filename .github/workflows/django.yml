@@ -39,6 +39,8 @@ jobs:
           sleep 1
         done
         echo "Postgres er klar"
+        pg_isready -h localhost -p 5432 -U postgres
+        pg_isready
         psql --version
         pg_config --version
         psql -U postgres -h localhost -p 5432 -d postgres -c "SELECT version();"
